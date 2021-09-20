@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DeliveryDAL.Entities;
 using DeliveryDAL.Repositories;
+using DeliveryDAL.Interfaces;
 
 
 namespace DeliveryBLL.Services
@@ -16,20 +17,26 @@ namespace DeliveryBLL.Services
     /// </summary>
     public class OrderService : IOrderService
     {
-        OrderRepository orderRepository;
-        public OrderService(OrderRepository rep)
+
+        private readonly IOrderRepository _orderRepository;
+        private readonly IMapper _mapper;
+        public OrderService(OrderRepository rep, Mapper map)
         {
-            orderRepository = rep;
+            _orderRepository = rep;
+            _mapper = map;
         }
         public async Task<IEnumerable<OrderDTO>> GetAll()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Order>, IEnumerable<OrderDTO>>(await orderRepository.GetAll());
+            return mapper.Map<IEnumerable<Order>, IEnumerable<OrderDTO>>(await _orderRepository.GetAll());
         }
 
-        public async Task<OrderDTO> Create(OrderDTO orderDTO)
-        { 
-            Order order = orderRepository.Create()
+        public async Task<OrderDTO> CreateOrder(OrderDTO orderDTO)
+        {
+            var mappedOrderFromPL = _mapper.Map<Order>(orderDTO);
+            Order order = await _orderRepository.CreateOrder(mappedOrderFromPL);
+            var mapperOrderFromDAL = _mapper.Map<OrderDTO>(order);
+            return mapperOrderFromDAL;
         }
     }
 }   

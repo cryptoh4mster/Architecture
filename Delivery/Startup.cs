@@ -1,3 +1,5 @@
+using AutoMapper;
+using DeliveryPL.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +10,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using DeliveryDAL.EF;
+using DeliveryBLL.Interfaces;
+using DeliveryBLL.Services;
+using DeliveryDAL.Interfaces;
+using DeliveryDAL.Repositories;
+using DeliveryPL.Mappings;
 
 namespace Delivery
 {
@@ -23,6 +32,23 @@ namespace Delivery
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var sqlConnectionString = Configuration.GetConnectionString("DataAccessMSSQLProvider");
+            /*var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);*/
+
+            
+
+            services.AddDbContext<DeliveryContext>(options => options.UseSqlServer(sqlConnectionString));
+            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddScoped<OrderRepository>();
+
+            // services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderService, OrderService>();
+            
             services.AddControllersWithViews();
         }
 

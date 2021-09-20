@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using DeliveryDAL.Entities;
 using DeliveryDAL.EF;
 using Microsoft.EntityFrameworkCore;
+using DeliveryDAL.Interfaces;
 
 namespace DeliveryDAL.Repositories
 {
     /// <summary>
     /// ЛОгика Data Access Layer 
     /// </summary>
-    public class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
         DeliveryContext db;
         public OrderRepository(DeliveryContext context)
@@ -23,7 +24,7 @@ namespace DeliveryDAL.Repositories
             return await db.Orders.ToListAsync();
         }
 
-        public async Task<Order> Create(Order order)
+        public async Task<Order> CreateOrder(Order order)
         {
             await db.Orders.AddAsync(order);
             await db.SaveChangesAsync();

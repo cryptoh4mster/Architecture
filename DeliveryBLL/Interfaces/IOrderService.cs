@@ -9,6 +9,6 @@ namespace DeliveryBLL.Interfaces
     public interface IOrderService
     {
         Task<IEnumerable<OrderDTO>> GetAll();
-        Task<OrderDTO> Create(OrderDTO orderDTO);
+        Task<OrderDTO> CreateOrder(OrderDTO orderDTO);
     }
 }

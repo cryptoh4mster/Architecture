@@ -14,5 +14,16 @@ namespace DeliveryDAL.EF
         {
             Database.EnsureCreated();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasData(
+                new Order
+                {
+                    Id = 1,
+                    Name = "Первая запись"
+                });
+        }
     }
 }
+    

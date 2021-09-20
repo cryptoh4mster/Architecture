@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryPL", "Delivery\Deli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryDAL", "DeliveryDAL\DeliveryDAL.csproj", "{8406B563-313B-470F-AA2C-47A3AEDD7257}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryBLL", "DeliveryBLL\DeliveryBLL.csproj", "{77AAD140-F396-4694-94A5-D8F109E2106A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryBLL", "DeliveryBLL\DeliveryBLL.csproj", "{77AAD140-F396-4694-94A5-D8F109E2106A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
