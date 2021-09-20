@@ -8,10 +8,6 @@ namespace DeliveryPL.Models
 {
     public class OrderViewModel
     {
-        public OrderViewModel(OrderDTO orderDTO)
-        {
-                
-        }
         public int Id { get; set; }
         public string Name { get; set; }
     }

@@ -9,7 +9,7 @@ namespace DeliveryDAL.Interfaces
     public interface IOrderRepository
     {
         Task<IEnumerable<Order>> GetAll();
-        Task<Order> CreateOrder(Order item);
+        Task<Order> CreateOrder(Order order);
 
     }
 }

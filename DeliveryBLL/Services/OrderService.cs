@@ -20,15 +20,14 @@ namespace DeliveryBLL.Services
 
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        public OrderService(OrderRepository rep, Mapper map)
+        public OrderService(OrderRepository rep, IMapper map)
         {
             _orderRepository = rep;
             _mapper = map;
         }
         public async Task<IEnumerable<OrderDTO>> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Order>, IEnumerable<OrderDTO>>(await _orderRepository.GetAll());
+            return _mapper.Map<IEnumerable<OrderDTO>>(await _orderRepository.GetAll());
         }
 
         public async Task<OrderDTO> CreateOrder(OrderDTO orderDTO)

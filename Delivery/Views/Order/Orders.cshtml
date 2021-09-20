@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Orders";
+}
+@model IEnumerable<DeliveryPL.Models.OrderViewModel>
+<h1>Список существующих заказов</h1>
+@foreach (var item in Model)
+{
+    <p>
+        @item.Id
+        @item.Name
+</p>
+<br />
+}

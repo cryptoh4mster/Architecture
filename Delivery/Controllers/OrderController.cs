@@ -25,18 +25,28 @@ namespace DeliveryPL.Controllers
         {
             var list = await _orderService.GetAll();
             var testMap = _mapper.Map<IEnumerable<OrderViewModel>>(list);
-            return View(testMap);
+            return View("Orders", testMap);
         }
         public async Task<ActionResult<OrderViewModel>> CreateOrder(OrderViewModel orderViewModel)
         {
             var mappedDTOFromVM = _mapper.Map<OrderDTO>(orderViewModel);
             var orderDTO = await _orderService.CreateOrder(mappedDTOFromVM);
             var mappedOrderVMFromDTO = _mapper.Map<OrderViewModel>(orderDTO);
-            return View(mappedOrderVMFromDTO);
+            return RedirectToAction("GetAll");
         }
         public IActionResult Index()
         {
             return View();
+        }
+        
+        public IActionResult Orders()
+        {
+            return RedirectToAction("GetAll");
+        }
+
+        public IActionResult Ordering()
+        {
+            return View("Ordering");
         }
     }
 }

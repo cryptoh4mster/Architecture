@@ -33,22 +33,12 @@ namespace Delivery
         public void ConfigureServices(IServiceCollection services)
         {
             var sqlConnectionString = Configuration.GetConnectionString("DataAccessMSSQLProvider");
-            /*var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);*/
-
-            
-
             services.AddDbContext<DeliveryContext>(options => options.UseSqlServer(sqlConnectionString));
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<OrderRepository>();
 
-            // services.AddTransient<IOrderRepository, OrderRepository>();
+            //services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IOrderService, OrderService>();
-            
             services.AddControllersWithViews();
         }
 
@@ -76,7 +66,7 @@ namespace Delivery
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Order}/{action=Index}/{id?}");
             });
         }
     }
