@@ -14,7 +14,7 @@ namespace DeliveryDAL.Repositories
     /// </summary>
     public class OrderRepository : IOrderRepository
     {
-        DeliveryContext db;
+        private readonly DeliveryContext db;
         public OrderRepository(DeliveryContext context)
         {
             db = context;

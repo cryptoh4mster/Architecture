@@ -35,10 +35,8 @@ namespace Delivery
             var sqlConnectionString = Configuration.GetConnectionString("DataAccessMSSQLProvider");
             services.AddDbContext<DeliveryContext>(options => options.UseSqlServer(sqlConnectionString));
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddScoped<OrderRepository>();
-
-            //services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddControllersWithViews();
         }
 

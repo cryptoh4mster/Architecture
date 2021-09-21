@@ -20,7 +20,7 @@ namespace DeliveryBLL.Services
 
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        public OrderService(OrderRepository rep, IMapper map)
+        public OrderService(IOrderRepository rep, IMapper map)
         {
             _orderRepository = rep;
             _mapper = map;
